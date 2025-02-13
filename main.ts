@@ -1,5 +1,8 @@
 namespace SpriteKind {
     export const house = SpriteKind.create()
+    export const smallHomeSign = SpriteKind.create()
+    export const mediumHomeSign = SpriteKind.create()
+    export const largeHomeSign = SpriteKind.create()
 }
 namespace StatusBarKind {
     export const Storage = StatusBarKind.create()
@@ -7,6 +10,63 @@ namespace StatusBarKind {
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile0`, function (sprite, location) {
     statusbar.value = 50
 })
+function spawnLargHouse () {
+    for (let value of tiles.getTilesByType(assets.tile`myTile11`)) {
+        LargeHome = sprites.create(img`
+            ....................72722727....................
+            .................22277722727222.................
+            ..............22272272722777227222..............
+            ...........72272277772722727777227227...........
+            ........77772272272272722727227227227777........
+            .....22272272277772272722727227777227227222.....
+            ...227777227227227227772277722722722722777722...
+            dcc227227227777227227272272722722777722722722ccd
+            bc47772272272272272272722727227227227227227774cb
+            d4422722777722722777727227277772272277772272244d
+            d4422722722722777722727227272277772272272272244d
+            dcc227777227227227227772277722722722722777722ccd
+            bc42272272277772272272722727227227777227227224cb
+            d4477722722722722722727227272272272272272277744d
+            d4422722777722722722727227272272272277772272244d
+            dcc227227227227227777272272777722722722722722ccd
+            bc42277772272277772277722777227777227227777224cb
+            d4422722722777722722727227272272277772272272244d
+            d4477722722722722722727227272272272272272277744d
+            dcc227227777227227227272272722722722777722722ccd
+            bc42272272272272272277722777227227227227227224cb
+            d4422777722722722777cc4444cc7772272272277772244d
+            d4422722722722777cc4444444444cc7772272272272244d
+            dcc77722722777cc44444cccccc44444cc77722722777ccd
+            bc422722777cc444448843333334cc44444cc77722722bcb
+            d4422722cc44444cc43333333333334cc44444cc22722bbd
+            d44aacc4444ccc43333333333333333334ccc4444cc22bbd
+            dccc4444cccbdddbcc888888888888ccbdddbccc4444cccd
+            ccccccccbbbbbbbcb33333333333333b8bbbbbbbcccccccc
+            4333333333333bc3333333333333333338b3333333333334
+            44cb3333333338b311111111111111113b8333333333bc44
+            44488888888888d1bbbbbbbbbbbbbbbb1d88888888888444
+            4444444444444811beeeeeeeeeeeeeeb1183333333334444
+            444822222228481be3b33b33b33b33beb183822222228444
+            444888888888481be3b33b33b33b33beb183888888888444
+            44483333333848bbf3b3effffffe33bebb83833333338444
+            44483ff3ff3848bbf3bffffffffff3bebb8383ff3ff38444
+            44483cc3cc3848bbf3effffffffffebebb8383cc3cc38444
+            44483333333848bbf3eeeeeeeeeeeebebb83833333338444
+            84483ff3ff3848bbe3b33b33b33b33bebb8383ff3ff3844c
+            84483cc3cc3848bbe3b33b33b33b33bebb8383cc3cc3844c
+            88444444444448bbe3b33b33b33feeeebb834444444444cc
+            .8444444444448bbe3b33b33b33ffffebb833333333344c.
+            ..844bbb4bbb48bbf3b33b33b33f33febb83bbb3bbb34c..
+            ...84bbb4bbb48bbf3b33b33b33bffeebb83bbb3bbb3c...
+            ....b444444448bbf3b33b33b33b33bebb833333333b....
+            .....b4bbb4448bbf3b33b33b33b33bebb8333bbb3b.....
+            ......b888bbb8bbe3b33b33b33b33bebb8bbb888b......
+            `, SpriteKind.house)
+        tiles.placeOnTile(LargeHome, value)
+        tiles.setTileAt(value, assets.tile`transparency16`)
+        LargeHome.setScale(1.5, ScaleAnchor.Middle)
+    }
+}
 function village_map () {
     scene.setBackgroundImage(img`
         1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
@@ -132,9 +192,9 @@ function village_map () {
         `)
     tiles.setCurrentTilemap(tilemap`level10`)
 }
-function spawnHouse () {
-    for (let index = 0; index <= 4; index++) {
-        home = sprites.create(img`
+function spawnSmallHouse () {
+    for (let value of tiles.getTilesByType(assets.tile`myTile9`)) {
+        SmallHome = sprites.create(img`
             ....................e2e22e2e....................
             .................222eee22e2e222.................
             ..............222e22e2e22eee22e222..............
@@ -143,48 +203,106 @@ function spawnHouse () {
             .....222e22e22eeee22e2e22e2e22eeee22e22e222.....
             ...22eeee22e22e22e22eee22eee22e22e22e22eeee22...
             4cc22e22e22eeee22e22e2e22e2e22e22eeee22e22e22cc4
-            6c6eee22e22e22e22e22e2e22e2e22e22e22e22e22eee6c6
-            46622e22eeee22e22eeee2e22e2eeee22e22eeee22e22664
-            46622e22e22e22eeee22e2e22e2e22eeee22e22e22e22664
+            eceeee22e22e22e22e22e2e22e2e22e22e22e22e22eeeece
+            4ee22e22eeee22e22eeee2e22e2eeee22e22eeee22e22ee4
+            4ee22e22e22e22eeee22e2e22e2e22eeee22e22e22e22ee4
             4cc22eeee22e22e22e22eee22eee22e22e22e22eeee22cc4
-            6c622e22e22eeee22e22e2e22e2e22e22eeee22e22e226c6
-            466eee22e22e22e22e22e2e22e2e22e22e22e22e22eee664
-            46622e22eeee22e22e22e2e22e2e22e22e22eeee22e22664
+            ece22e22e22eeee22e22e2e22e2e22e22eeee22e22e22ece
+            4eeeee22e22e22e22e22e2e22e2e22e22e22e22e22eeeee4
+            4ee22e22eeee22e22e22e2e22e2e22e22e22eeee22e22ee4
             4cc22e22e22e22e22eeee2e22e2eeee22e22e22e22e22cc4
-            6c622eeee22e22eeee22eee22eee22eeee22e22eeee226c6
-            46622e22e22eeee22e22e2e22e2e22e22eeee22e22e22664
-            466eee22e22e22e22e22e2e22e2e22e22e22e22e22eee664
+            ece22eeee22e22eeee22eee22eee22eeee22e22eeee22ece
+            4ee22e22e22eeee22e22e2e22e2e22e22eeee22e22e22ee4
+            4eeeee22e22e22e22e22e2e22e2e22e22e22e22e22eeeee4
             4cc22e22eeee22e22e22e2e22e2e22e22e22eeee22e22cc4
-            6c622e22e22e22e22e22eee22eee22e22e22e22e22e226c6
-            46622eeee22e22e22eeecc6666cceee22e22e22eeee22664
-            46622e22e22e22eeecc6666666666cceee22e22e22e22664
-            4cceee22e22eeecc66666cccccc66666cceee22e22eeecc4
-            6c622e22eeecc66666cc64444446cc66666cceee22e226c6
-            46622e22cc66666cc64444444444446cc66666cc22e22664
-            46622cc6666ccc64444444444444444446ccc6666cc22664
-            4ccc6666ccc6444bcc666666666666ccb4446ccc6666ccc4
-            cccccccc6666666cb44444444444444bc6666666cccccccc
-            64444444444446c444444444444444444c64444444444446
-            66cb444444444cb411111111111111114bc444444444bc66
-            666cccccccccccd166666666666666661dccccccccccc666
-            6666444444444c116eeeeeeeeeeeeee611c4444444446666
-            666e2222222e4c16e4e44e44e44e44ee61c4e2222222e666
-            666eeeeeeeee4c16e4e44e44e44e44ee61c4eeeeeeeee666
-            666eddddddde4c66f4e4effffffe44ee66c4eddddddde666
-            666edffdffde4c66f4effffffffff4ee66c4edffdffde666
-            666edccdccde4c66f4effffffffffeee66c4edccdccde666
-            666eddddddde4c66f4eeeeeeeeeeeeee66c4eddddddde666
-            c66edffdffde4c66e4e44e44e44e44ee66c4edffdffde66c
-            c66edccdccde4c66e4e44e44e44e44ee66c4edccdccde66c
-            cc66666666664c66e4e44e44e44feeee66c46666666666cc
-            .c66444444444c66e4e44e44e44ffffe66c44444444466c.
-            ..c64eee4eee4c66f4e44e44e44f44fe66c4eee4eee46c..
-            ...c4eee4eee4c66f4e44e44e44effee66c4eee4eee4c...
-            ....644444444c66f4e44e44e44e44ee66c444444446....
-            .....64eee444c66f4e44e44e44e44ee66c444eee46.....
-            ......6ccc666c66e4e44e44e44e44ee66c666ccc6......
+            ece22e22e22e22e22e22eee22eee22e22e22e22e22e22ece
+            4ee22eeee22e22e22eeecceeeecceee22e22e22eeee22ee4
+            4ee22e22e22e22eeecceeeeeeeeeecceee22e22e22e22ee4
+            4cceee22e22eeecceeeeecccccceeeeecceee22e22eeecc4
+            ece22e22eeecceeeeecce444444ecceeeeecceee22e22ece
+            4ee22e22cceeeeecce444444444444ecceeeeecc22e22ee4
+            4ee22cceeeeccce444444444444444444eccceeeecc22ee4
+            4ccceeeeccce444bcceeeeeeeeeeeeccb444eccceeeeccc4
+            cccccccceeeeeeecb44444444444444bceeeeeeecccccccc
+            e444444444444ec444444444444444444ce444444444444e
+            eecb444444444cb411111111111111114bc444444444bcee
+            eeecccccccccccd1eeeeeeeeeeeeeeee1dccccccccccceee
+            eeee444444444c11eeeeeeeeeeeeeeee11c444444444eeee
+            eeee2222222e4c1ee4e44e44e44e44eee1c4e2222222eeee
+            eeeeeeeeeeee4c1ee4e44e44e44e44eee1c4eeeeeeeeeeee
+            eeeeddddddde4ceef4e4effffffe44eeeec4edddddddeeee
+            eeeedffdffde4ceef4effffffffff4eeeec4edffdffdeeee
+            eeeedccdccde4ceef4effffffffffeeeeec4edccdccdeeee
+            eeeeddddddde4ceef4eeeeeeeeeeeeeeeec4edddddddeeee
+            ceeedffdffde4ceee4e44e44e44e44eeeec4edffdffdeeee
+            ceeedccdccde4ceee4e44e44e44e44eeeec4edccdccdeeec
+            cceeeeeeeeee4ceee4e44e44e44feeeeeec4eeeeeeeeeecc
+            .cee444444444ceee4e44e44e44ffffeeec444444444eec.
+            ..ce4eee4eee4ceef4e44e44e44f44feeec4eee4eee4ec..
+            ...c4eee4eee4ceef4e44e44e44effeeeec4eee4eee4c...
+            ....e44444444ceef4e44e44e44e44eeeec44444444e....
+            .....e4eee444ceef4e44e44e44e44eeeec444eee4e.....
+            ......eccceeeceee4e44e44e44e44eeeeceeeccce......
             `, SpriteKind.house)
-        home.z = -1
+        SmallHome.setScale(0.7, ScaleAnchor.Middle)
+        tiles.placeOnTile(SmallHome, value)
+        tiles.setTileAt(value, assets.tile`transparency16`)
+    }
+}
+function spawnMediumHouse () {
+    for (let value of tiles.getTilesByType(assets.tile`myTile10`)) {
+        MediumHome = sprites.create(img`
+            ....................8a8aa8a8....................
+            .................aaa888aa8a8aaa.................
+            ..............aaa8aa8a8aa888aa8aaa..............
+            ...........8aa8aa8888a8aa8a8888aa8aa8...........
+            ........8888aa8aa8aa8a8aa8a8aa8aa8aa8888........
+            .....aaa8aa8aa8888aa8a8aa8a8aa8888aa8aa8aaa.....
+            ...aa8888aa8aa8aa8aa888aa888aa8aa8aa8aa8888aa...
+            dccaa8aa8aa8888aa8aa8a8aa8a8aa8aa8888aa8aa8aaccd
+            bcb888aa8aa8aa8aa8aa8a8aa8a8aa8aa8aa8aa8aa888bcb
+            dbbaa8aa8888aa8aa8888a8aa8a8888aa8aa8888aa8aabbd
+            dbbaa8aa8aa8aa8888aa8a8aa8a8aa8888aa8aa8aa8aabbd
+            dccaa8888aa8aa8aa8aa888aa888aa8aa8aa8aa8888aaccd
+            bcbaa8aa8aa8888aa8aa8a8aa8a8aa8aa8888aa8aa8aabcb
+            dbb888aa8aa8aa8aa8aa8a8aa8a8aa8aa8aa8aa8aa888bbd
+            dbbaa8aa8888aa8aa8aa8a8aa8a8aa8aa8aa8888aa8aabbd
+            dccaa8aa8aa8aa8aa8888a8aa8a8888aa8aa8aa8aa8aaccd
+            bcbaa8888aa8aa8888aa888aa888aa8888aa8aa8888aabcb
+            dbbaa8aa8aa8888aa8aa8a8aa8a8aa8aa8888aa8aa8aabbd
+            dbb888aa8aa8aa8aa8aa8a8aa8a8aa8aa8aa8aa8aa888bbd
+            dccaa8aa8888aa8aa8aa8a8aa8a8aa8aa8aa8888aa8aaccd
+            bcbaa8aa8aa8aa8aa8aa888aa888aa8aa8aa8aa8aa8aabcb
+            dbbaa8888aa8aa8aa888ccbbbbcc888aa8aa8aa8888aabbd
+            dbbaa8aa8aa8aa888ccbbbbbbbbbbcc888aa8aa8aa8aabbd
+            dcc888aa8aa888ccbbbbbccccccbbbbbcc888aa8aa888ccd
+            bcbaa8aa888ccbbbbbccbddddddbccbbbbbcc888aa8aabcb
+            dbbaa8aaccbbbbbccbddddddddddddbccbbbbbccaa8aabbd
+            dbbaaccbbbbcccbddddddddddddddddddbcccbbbbccaabbd
+            dcccbbbbcccbdddbccbbbbbbbbbbbbccbdddbcccbbbbcccd
+            ccccccccbbbbbbbcbddddddddddddddbcbbbbbbbcccccccc
+            bddddddddddddbcddddddddddddddddddcbddddddddddddb
+            bbcbdddddddddcbd1111111111111111dbcdddddddddbcbb
+            bbbcccccccccccd1bbbbbbbbbbbbbbbb1dcccccccccccbbb
+            bbbbdddddddddc11beeeeeeeeeeeeeeb11cdddddddddbbbb
+            bbb8aaaaaaa8dc1be3b33b33b33b33beb1cd8aaaaaaa8bbb
+            bbb888888888dc1be3b33b33b33b33beb1cd888888888bbb
+            bbb833333338dcbbf3b3effffffe33bebbcd833333338bbb
+            bbb83ff3ff38dcbbf3bffffffffff3bebbcd83ff3ff38bbb
+            bbb83cc3cc38dcbbf3effffffffffebebbcd83cc3cc38bbb
+            bbb833333338dcbbf3eeeeeeeeeeeebebbcd833333338bbb
+            cbb83ff3ff38dcbbe3b33b33b33b33bebbcd83ff3ff38bbc
+            cbb83cc3cc38dcbbe3b33b33b33b33bebbcd83cc3cc38bbc
+            ccbbbbbbbbbbdcbbe3b33b33b33feeeebbcdbbbbbbbbbbcc
+            .cbbdddddddddcbbe3b33b33b33ffffebbcdddddddddbbc.
+            ..cbdbbbdbbbdcbbf3b33b33b33f33febbcdbbbdbbbdbc..
+            ...cdbbbdbbbdcbbf3b33b33b33bffeebbcdbbbdbbbdc...
+            ....bddddddddcbbf3b33b33b33b33bebbcddddddddb....
+            .....bdbbbdddcbbf3b33b33b33b33bebbcdddbbbdb.....
+            ......bcccbbbcbbe3b33b33b33b33bebbcbbbcccb......
+            `, SpriteKind.house)
+        tiles.placeOnTile(MediumHome, value)
+        tiles.setTileAt(value, assets.tile`transparency16`)
     }
 }
 function home_map () {
@@ -312,10 +430,47 @@ function home_map () {
         `)
     tiles.setCurrentTilemap(tilemap`level4`)
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.mediumHomeSign, function (sprite, otherSprite) {
+    if (game.ask("Buy House for 200?")) {
+        if (info.score() < 200) {
+            game.splash("You will be in debt if you buy this house!")
+            tiles.placeOnRandomTile(hero, sprites.dungeon.floorLight0)
+        } else {
+            info.changeScoreBy(-200)
+            tiles.placeOnRandomTile(hero, sprites.dungeon.floorLight0)
+        }
+    } else {
+        tiles.placeOnRandomTile(hero, sprites.dungeon.floorLight0)
+    }
+})
 scene.onOverlapTile(SpriteKind.Projectile, assets.tile`myTile7`, function (sprite, location) {
     sprites.destroy(sprite)
     tiles.setTileAt(location, assets.tile`myTile6`)
 })
+function mediumHomeSign () {
+    for (let value of tiles.getTilesByType(assets.tile`myTile15`)) {
+        MediumHomesign = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . e e e e e e e e e e e e e . . 
+            . e d d d d d d d d d d d e . . 
+            . e d d f f f f f f f d d e . . 
+            . e d d d d f d f d d d d e . . 
+            . e d d d d f d f d d d d e . . 
+            . e d d d d f d f d d d d e . . 
+            . e d d f f f f f f f d d e . . 
+            . e d d d d d d d d d d d e . . 
+            . e e e e e d d d e e e e e . . 
+            . . . . . e d d d e . . . . . . 
+            . . . . . e d d d e . . . . . . 
+            . . . . . e d d d e . . . . . . 
+            . . . . . e d d d e . . . . . . 
+            `, SpriteKind.mediumHomeSign)
+        tiles.placeOnTile(MediumHomesign, value)
+        tiles.setTileAt(value, assets.tile`transparency16`)
+    }
+}
 function createStatusBar () {
     statusbar = statusbars.create(20, 4, StatusBarKind.Storage)
     statusbar.max = 50
@@ -330,8 +485,82 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, l
         info.changeScoreBy(1)
     }
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.largeHomeSign, function (sprite, otherSprite) {
+    if (game.ask("Buy House for 300?")) {
+        if (info.score() < 300) {
+            game.splash("You will be in debt if you buy this house!")
+            tiles.placeOnRandomTile(hero, sprites.dungeon.floorLight0)
+        } else {
+            info.changeScoreBy(-300)
+            tiles.placeOnRandomTile(hero, sprites.dungeon.floorLight0)
+        }
+    } else {
+        tiles.placeOnRandomTile(hero, sprites.dungeon.floorLight0)
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.smallHomeSign, function (sprite, otherSprite) {
+    if (game.ask("Buy House for 100?")) {
+        if (info.score() < 100) {
+            game.splash("You will be in debt if you buy this house!")
+            tiles.placeOnRandomTile(hero, sprites.dungeon.floorLight0)
+        } else {
+            info.changeScoreBy(-100)
+            tiles.placeOnRandomTile(hero, sprites.dungeon.floorLight0)
+        }
+    } else {
+        tiles.placeOnRandomTile(hero, sprites.dungeon.floorLight0)
+    }
+})
+function spawnSmallhomesign () {
+    for (let value of tiles.getTilesByType(assets.tile`myTile12`)) {
+        smallHomeSign = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . e e e e e e e e e e e e e . . 
+            . e d d d d d d d d d d d e . . 
+            . e d d d f f f f f d d d e . . 
+            . e d d d d d f d d d d d e . . 
+            . e d d d d d f d d d d d e . . 
+            . e d d d d d f d d d d d e . . 
+            . e d d d f f f f f d d d e . . 
+            . e d d d d d d d d d d d e . . 
+            . e e e e e d d d e e e e e . . 
+            . . . . . e d d d e . . . . . . 
+            . . . . . e d d d e . . . . . . 
+            . . . . . e d d d e . . . . . . 
+            . . . . . e d d d e . . . . . . 
+            `, SpriteKind.smallHomeSign)
+        tiles.placeOnTile(smallHomeSign, value)
+        tiles.setTileAt(value, assets.tile`transparency16`)
+    }
+}
 function field_map () {
     tiles.setCurrentTilemap(tilemap`level2`)
+}
+function LargehomeSign () {
+    for (let value of tiles.getTilesByType(assets.tile`myTile14`)) {
+        LargeHomeSign = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . e e e e e e e e e e e e e . . 
+            . e d d d d d d d d d d d e . . 
+            . e d d f f f f f f f d d e . . 
+            . e d d d f d f d f d d d e . . 
+            . e d d d f d f d f d d d e . . 
+            . e d d d f d f d f d d d e . . 
+            . e d d f f f f f f f d d e . . 
+            . e d d d d d d d d d d d e . . 
+            . e e e e e d d d e e e e e . . 
+            . . . . . e d d d e . . . . . . 
+            . . . . . e d d d e . . . . . . 
+            . . . . . e d d d e . . . . . . 
+            . . . . . e d d d e . . . . . . 
+            `, SpriteKind.largeHomeSign)
+        tiles.placeOnTile(LargeHomeSign, value)
+        tiles.setTileAt(value, assets.tile`transparency16`)
+    }
 }
 function spawnPlayer () {
     for (let value of tiles.getTilesByType(assets.tile`myTile8`)) {
@@ -355,7 +584,7 @@ function spawnPlayer () {
             `, SpriteKind.Player)
         controller.moveSprite(hero)
         tiles.placeOnTile(hero, value)
-        tiles.setTileAt(value, assets.tile`transparency16`)
+        tiles.setTileAt(value, sprites.dungeon.floorLight0)
         scene.cameraFollowSprite(hero)
         characterAnimations.loopFrames(
         hero,
@@ -655,17 +884,35 @@ function spawnPlayer () {
         )
     }
 }
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.doorOpenNorth, function (sprite, location) {
+    if (game.ask("Back to crop field?")) {
+        field_map()
+    } else {
+        tiles.placeOnRandomTile(hero, sprites.dungeon.floorLight0)
+    }
+})
 scene.onOverlapTile(SpriteKind.Projectile, assets.tile`myTile6`, function (sprite, location) {
     sprites.destroy(sprite)
     tiles.setTileAt(location, assets.tile`myTile5`)
 })
 let projectile: Sprite = null
+let LargeHomeSign: Sprite = null
+let smallHomeSign: Sprite = null
+let MediumHomesign: Sprite = null
 let hero: Sprite = null
-let home: Sprite = null
+let MediumHome: Sprite = null
+let SmallHome: Sprite = null
+let LargeHome: Sprite = null
 let statusbar: StatusBarSprite = null
 village_map()
 spawnPlayer()
 createStatusBar()
+spawnSmallHouse()
+spawnMediumHouse()
+spawnLargHouse()
+spawnSmallhomesign()
+mediumHomeSign()
+LargehomeSign()
 game.onUpdateInterval(100, function () {
     if (controller.A.isPressed()) {
         if (statusbar.value >= 1) {
