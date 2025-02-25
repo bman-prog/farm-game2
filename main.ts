@@ -67,6 +67,20 @@ function spawnLargHouse () {
         LargeHome.setScale(1.5, ScaleAnchor.Middle)
     }
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, location) {
+    spawnAll()
+})
+function spawnAll () {
+    village_map()
+    spawnPlayer()
+    createStatusBar()
+    spawnSmallHouse()
+    spawnMediumHouse()
+    spawnLargHouse()
+    spawnSmallhomesign()
+    LargehomeSign()
+    spawnMediumHomeSign()
+}
 function village_map () {
     scene.setBackgroundImage(img`
         1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
@@ -428,7 +442,7 @@ function largehome_map () {
         eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
         eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
         `)
-    tiles.setCurrentTilemap(tilemap`level4`)
+    tiles.setCurrentTilemap(tilemap`level17`)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.mediumHomeSign, function (sprite, otherSprite) {
     if (game.ask("Buy House for 200?")) {
@@ -437,7 +451,13 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.mediumHomeSign, function (sprite
             tiles.placeOnRandomTile(hero, sprites.dungeon.floorLight0)
         } else {
             info.changeScoreBy(-200)
-            tiles.placeOnRandomTile(hero, sprites.dungeon.floorLight0)
+            mediumhome_map()
+            sprites.destroyAllSpritesOfKind(SpriteKind.Player)
+            spawnPlayer()
+            sprites.destroyAllSpritesOfKind(SpriteKind.house)
+            sprites.destroyAllSpritesOfKind(SpriteKind.smallHomeSign)
+            sprites.destroyAllSpritesOfKind(SpriteKind.mediumHomeSign)
+            sprites.destroyAllSpritesOfKind(SpriteKind.largeHomeSign)
         }
     } else {
         tiles.placeOnRandomTile(hero, sprites.dungeon.floorLight0)
@@ -621,7 +641,7 @@ function createStatusBar () {
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, location) {
     if (controller.B.isPressed()) {
         tiles.setTileAt(location, assets.tile`myTile7`)
-        info.changeScoreBy(1)
+        info.changeScoreBy(100)
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.largeHomeSign, function (sprite, otherSprite) {
@@ -631,7 +651,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.largeHomeSign, function (sprite,
             tiles.placeOnRandomTile(hero, sprites.dungeon.floorLight0)
         } else {
             info.changeScoreBy(-300)
-            tiles.placeOnRandomTile(hero, sprites.dungeon.floorLight0)
+            largehome_map()
+            spawnPlayer()
+            sprites.destroyAllSpritesOfKind(SpriteKind.smallHomeSign)
         }
     } else {
         tiles.placeOnRandomTile(hero, sprites.dungeon.floorLight0)
@@ -760,7 +782,7 @@ function mediumhome_map () {
         eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
         eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
         `)
-    tiles.setCurrentTilemap(tilemap`level4`)
+    tiles.setCurrentTilemap(tilemap`level15`)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.smallHomeSign, function (sprite, otherSprite) {
     if (game.ask("Buy House for 100?")) {
@@ -1175,15 +1197,7 @@ let MediumHome: Sprite = null
 let SmallHome: Sprite = null
 let LargeHome: Sprite = null
 let statusbar: StatusBarSprite = null
-village_map()
-spawnPlayer()
-createStatusBar()
-spawnSmallHouse()
-spawnMediumHouse()
-spawnLargHouse()
-spawnSmallhomesign()
-LargehomeSign()
-spawnMediumHomeSign()
+spawnAll()
 game.onUpdateInterval(100, function () {
     if (controller.A.isPressed()) {
         if (statusbar.value >= 1) {
